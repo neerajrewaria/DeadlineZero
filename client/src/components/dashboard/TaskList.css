@@ -1,0 +1,158 @@
+/* ══════════════════════════════════════
+   TaskList.css
+══════════════════════════════════════ */
+.tl-wrap {
+  position: relative;
+  width: 100%;
+  border-radius: 28px;
+  overflow: hidden;
+  background: linear-gradient(145deg, #08081a 0%, #0c0d24 45%, #080c1e 80%, #0a0818 100%);
+  border: 1px solid rgba(130,100,255,0.2);
+  box-shadow:
+    0 0 0 1px rgba(100,80,255,0.07),
+    0 8px 40px rgba(80,50,200,0.16),
+    0 40px 100px rgba(0,0,0,0.5),
+    inset 0 1px 0 rgba(255,255,255,0.05);
+  animation: tlFadeIn 0.65s cubic-bezier(0.22,1,0.36,1) both;
+}
+@keyframes tlFadeIn {
+  from { opacity:0; transform:translateY(24px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+.tl-bg-orb {
+  position:absolute; border-radius:50%; pointer-events:none; filter:blur(70px);
+}
+.tl-bg-orb--1 {
+  width:420px; height:420px; top:-150px; right:-80px;
+  background:radial-gradient(circle,rgba(110,60,255,.14) 0%,transparent 70%);
+  animation:tlOrb1 11s ease-in-out infinite;
+}
+.tl-bg-orb--2 {
+  width:320px; height:320px; bottom:-100px; left:-60px;
+  background:radial-gradient(circle,rgba(0,160,255,.1) 0%,transparent 70%);
+  animation:tlOrb2 14s ease-in-out infinite;
+}
+@keyframes tlOrb1 { 0%,100%{transform:translate(0,0);}50%{transform:translate(-16px,18px);} }
+@keyframes tlOrb2 { 0%,100%{transform:translate(0,0);}50%{transform:translate(14px,-12px);} }
+
+.tl-border-beam {
+  position:absolute; inset:0; border-radius:inherit; pointer-events:none; padding:1px;
+  background:conic-gradient(from var(--tl-angle,0deg),transparent 60%,rgba(130,90,255,.6) 75%,rgba(100,200,255,.5) 87%,transparent 100%);
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor; mask-composite:exclude;
+  animation:tlBeam 7s linear infinite;
+}
+@property --tl-angle { syntax:"<angle>"; inherits:false; initial-value:0deg; }
+@keyframes tlBeam { to{--tl-angle:360deg;} }
+
+.tl-inner {
+  position:relative; z-index:1;
+  padding:40px 44px 44px;
+  display:flex; flex-direction:column; gap:32px;
+}
+
+/* ── Header ── */
+.tl-header { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px; }
+.tl-header__left { display:flex; align-items:center; gap:18px; }
+
+.tl-header__icon-wrap {
+  width:50px; height:50px; border-radius:14px; flex-shrink:0;
+  background:rgba(130,90,255,.15); border:1px solid rgba(130,90,255,.25);
+  display:flex; align-items:center; justify-content:center;
+  animation:tlIconFloat 4s ease-in-out infinite;
+}
+@keyframes tlIconFloat { 0%,100%{transform:translateY(0);}50%{transform:translateY(-4px);} }
+.tl-header__icon { font-size:22px; color:#a78bfa; }
+
+.tl-header__badges { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:6px; }
+.tl-badge {
+  display:inline-flex; align-items:center; gap:6px;
+  padding:4px 12px; border-radius:100px; font-size:11px; font-weight:500;
+  letter-spacing:.04em; backdrop-filter:blur(8px);
+}
+.tl-badge--ai   { background:rgba(60,220,120,.1); border:1px solid rgba(60,220,120,.25); color:#4ade80; }
+.tl-badge--count{ background:rgba(130,90,255,.12); border:1px solid rgba(130,90,255,.28); color:#c4b5fd; }
+.tl-badge__dot  {
+  width:6px; height:6px; border-radius:50%; background:#4ade80;
+  box-shadow:0 0 6px #4ade80; animation:tlDotPulse 2s ease-in-out infinite;
+}
+@keyframes tlDotPulse { 0%,100%{box-shadow:0 0 5px #4ade80;}50%{box-shadow:0 0 12px #4ade80,0 0 22px rgba(74,222,128,.5);} }
+
+.tl-header__title {
+  font-size:clamp(22px,3.5vw,32px); font-weight:700;
+  color:rgba(255,255,255,.95); margin:0; letter-spacing:-.025em; line-height:1.15;
+}
+.tl-grad-text {
+  background:linear-gradient(90deg,#a78bfa,#60a5fa,#c084fc,#a78bfa);
+  background-size:200% auto;
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  animation:tlGrad 4s linear infinite;
+}
+@keyframes tlGrad { from{background-position:0% center;}to{background-position:200% center;} }
+.tl-header__sub { font-size:13.5px; color:rgba(155,145,195,.7); margin:4px 0 0; }
+
+/* ── List ── */
+.tl-list { display:flex; flex-direction:column; gap:14px; }
+
+/* ── Empty state ── */
+.tl-empty {
+  display:flex; flex-direction:column; align-items:center;
+  gap:18px; padding:60px 20px; text-align:center;
+}
+.tl-empty__orb-wrap {
+  position:relative; width:110px; height:110px;
+  display:flex; align-items:center; justify-content:center; margin-bottom:8px;
+}
+.tl-orb-ring { position:absolute; border-radius:50%; }
+.tl-orb-ring--outer {
+  width:110px; height:110px;
+  background:conic-gradient(from 0deg,transparent 65%,rgba(130,90,255,.7) 80%,rgba(100,200,255,.5) 92%,transparent 100%);
+  -webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 1.5px),white calc(100% - 1.5px));
+  mask:radial-gradient(farthest-side,transparent calc(100% - 1.5px),white calc(100% - 1.5px));
+  animation:tlRing 9s linear infinite;
+}
+.tl-orb-ring--mid {
+  width:80px; height:80px;
+  background:conic-gradient(from 180deg,transparent 65%,rgba(100,200,255,.6) 82%,rgba(180,100,255,.5) 94%,transparent 100%);
+  -webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 1.5px),white calc(100% - 1.5px));
+  mask:radial-gradient(farthest-side,transparent calc(100% - 1.5px),white calc(100% - 1.5px));
+  animation:tlRing 6s linear infinite reverse;
+}
+.tl-orb-ring--inner {
+  width:54px; height:54px; border:1px solid rgba(200,140,255,.18);
+  animation:tlRing 4s linear infinite;
+}
+@keyframes tlRing { from{transform:rotate(0deg);}to{transform:rotate(360deg);} }
+.tl-orb-core {
+  position:relative; width:38px; height:38px; border-radius:50%;
+  background:linear-gradient(135deg,#6d28d9,#4f46e5,#0ea5e9);
+  display:flex; align-items:center; justify-content:center;
+  animation:tlCoreBreath 3s ease-in-out infinite;
+}
+@keyframes tlCoreBreath {
+  0%,100%{box-shadow:0 0 18px rgba(109,40,217,.7),0 0 36px rgba(79,70,229,.4);transform:scale(1);}
+  50%    {box-shadow:0 0 28px rgba(109,40,217,.9),0 0 55px rgba(79,70,229,.65);transform:scale(1.06);}
+}
+.tl-orb-icon { font-size:16px; color:#fff; animation:tlIconSpin 7s linear infinite; display:block; }
+@keyframes tlIconSpin { from{transform:rotate(0deg);}to{transform:rotate(360deg);} }
+.tl-orb-pulse {
+  position:absolute; inset:-6px; border-radius:50%;
+  border:1px solid rgba(130,90,255,.4); animation:tlPulse 2.4s ease-out infinite;
+}
+@keyframes tlPulse { 0%{transform:scale(1);opacity:.7;}100%{transform:scale(1.9);opacity:0;} }
+.tl-orb-dot { position:absolute; border-radius:50%; }
+.tl-orb-dot--1 { width:7px;height:7px;background:#a78bfa;box-shadow:0 0 7px #a78bfa;animation:tlOD1 9s linear infinite; }
+.tl-orb-dot--2 { width:5px;height:5px;background:#60a5fa;box-shadow:0 0 6px #60a5fa;animation:tlOD2 6s linear infinite reverse; }
+.tl-orb-dot--3 { width:4px;height:4px;background:#f0abfc;box-shadow:0 0 5px #f0abfc;animation:tlOD3 4s linear infinite; }
+@keyframes tlOD1 { from{transform:rotate(0deg)   translateX(55px) rotate(0deg);}  to{transform:rotate(360deg)  translateX(55px) rotate(-360deg);} }
+@keyframes tlOD2 { from{transform:rotate(45deg)  translateX(40px) rotate(-45deg);}to{transform:rotate(405deg) translateX(40px) rotate(-405deg);} }
+@keyframes tlOD3 { from{transform:rotate(120deg) translateX(27px) rotate(-120deg);}to{transform:rotate(480deg) translateX(27px) rotate(-480deg);} }
+
+.tl-empty__title { font-size:20px; font-weight:700; color:rgba(220,215,255,.9); margin:0; }
+.tl-empty__sub   { font-size:14px; color:rgba(150,140,190,.65); margin:0; }
+
+@media(max-width:680px) {
+  .tl-inner { padding:28px 18px 32px; }
+  .tl-header__left { gap:12px; }
+}

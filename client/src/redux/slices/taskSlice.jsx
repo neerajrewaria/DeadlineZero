@@ -5,6 +5,7 @@ const initialState = {
   stats: null,
   loading: false,
   dailyPlan: null,
+  plannerLoading: false,
 };
 
 const taskSlice = createSlice({
@@ -23,14 +24,17 @@ const taskSlice = createSlice({
     setLoading: (state, action) => {
       state.loading = action.payload;
     },
+    setPlannerLoading: (state, action) => {
+      state.plannerLoading = action.payload;
+    },
 
     clearTasks: (state) => {
       state.tasks = [];
       state.stats = null;
     },
     setDailyPlan: (state, action) => {
-    state.dailyPlan = action.payload;
-      },
+      state.dailyPlan = action.payload;
+    },
   },
 });
 
@@ -40,6 +44,8 @@ export const {
   setLoading,
   clearTasks,
   setDailyPlan,
+  setPlannerLoading
+
 } = taskSlice.actions;
 
 export default taskSlice.reducer;

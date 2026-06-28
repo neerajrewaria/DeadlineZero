@@ -93,6 +93,7 @@
 
 .navbar__logo-deadline {
   color: var(--navbar-text);
+  font-size: 1.4rem;
 }
 
 .navbar__logo-zero {
@@ -100,6 +101,7 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  font-size: 1.4rem;
 }
 
 /* ── Desktop Nav Links ──────────────────────────────────────────────────── */

@@ -1,49 +1,86 @@
+import "./StatsCards.css";
+
 function StatsCards({ stats }) {
+  if (!stats) {
+    return (
+      <div className="stats-loading">
+        <span className="stats-loading__dot" />
+        <span className="stats-loading__dot" />
+        <span className="stats-loading__dot" />
+      </div>
+    );
+  }
 
-if(!stats){
-return <p>Loading...</p>
-}
+  const cards = [
+    {
+      label: "Total Tasks",
+      value: stats.totalTasks,
+      suffix: "",
+      icon: "⬡",
+      colorClass: "stats-card--blue",
+      trend: "All tasks",
+    },
+    {
+      label: "Completed",
+      value: stats.completedTasks,
+      suffix: "",
+      icon: "✦",
+      colorClass: "stats-card--green",
+      trend: "Done",
+    },
+    {
+      label: "Pending",
+      value: stats.pendingTasks,
+      suffix: "",
+      icon: "◈",
+      colorClass: "stats-card--amber",
+      trend: "In progress",
+    },
+    {
+      label: "Completion",
+      value: stats.completionRate,
+      suffix: "%",
+      icon: "◎",
+      colorClass: "stats-card--purple",
+      trend: "Rate",
+    },
+  ];
 
-return(
+  return (
+    <div className="stats-grid">
+      {cards.map((card, i) => (
+        <div
+          className={`stats-card ${card.colorClass}`}
+          key={card.label}
+          style={{ animationDelay: `${i * 0.08}s` }}
+        >
+          <div className="stats-card__glow" />
+          <div className="stats-card__border-beam" />
 
-<div className="stats">
+          <div className="stats-card__top">
+            <div className="stats-card__icon-wrap">
+              <span className="stats-card__icon">{card.icon}</span>
+              <div className="stats-card__icon-ring" />
+            </div>
+            <span className="stats-card__trend">{card.trend}</span>
+          </div>
 
-<div className="card">
+          <div className="stats-card__value-row">
+            <span className="stats-card__value">
+              {card.value}
+              {card.suffix}
+            </span>
+          </div>
 
-<h3>Total Tasks</h3>
+          <p className="stats-card__label">{card.label}</p>
 
-<h2>{stats.totalTasks}</h2>
-
-</div>
-
-<div className="card">
-
-<h3>Completed</h3>
-
-<h2>{stats.completedTasks}</h2>
-
-</div>
-
-<div className="card">
-
-<h3>Pending</h3>
-
-<h2>{stats.pendingTasks}</h2>
-
-</div>
-
-<div className="card">
-
-<h3>Completion</h3>
-
-<h2>{stats.completionRate}%</h2>
-
-</div>
-
-</div>
-
-)
-
+          <div className="stats-card__bar">
+            <div className="stats-card__bar-fill" />
+          </div>
+        </div>
+      ))}
+    </div>
+  );
 }
 
 export default StatsCards;

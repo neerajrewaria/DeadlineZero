@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import "./Navbar.css";
+import '../dashboard/AITaskGenerator.css'
 
 function Navbar() {
   const { token } = useSelector((state) => state.auth);
@@ -25,6 +26,14 @@ function Navbar() {
 
         {/* ── Logo ── */}
         <Link to="/" className="navbar__logo" onClick={closeMenu}>
+              <div className="aig-orb-wrap">
+              <div className="aig-orb-ring aig-orb-ring--outer" />
+              <div className="aig-orb-ring aig-orb-ring--inner" />
+              <div className="aig-orb-core">
+                <span className="aig-orb-icon">✦</span>
+                <div className="aig-orb-pulse" />
+              </div>
+            </div>
           <span className="navbar__logo-deadline">Deadline</span>
           <span className="navbar__logo-zero">Zero</span>
         </Link>

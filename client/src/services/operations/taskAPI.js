@@ -2,7 +2,7 @@ import { apiConnector } from "../apiconnector";
 import { toast } from "react-hot-toast";
 import { setStats, setLoading,setTasks } from "../../redux/slices/taskSlice";
 import { ai,task } from "../apis";
-import { setDailyPlan } from "../../redux/slices/taskSlice";
+import { setDailyPlan,setPlannerLoading } from "../../redux/slices/taskSlice";
 
 export const getDashboardStats = (token) => {
   return async (dispatch) => {
@@ -168,7 +168,7 @@ export const createTaskWithAI = (prompt, token) => {
 
 export const getDailyPlan = (token) => {
   return async (dispatch) => {
-    dispatch(setLoading(true));
+   dispatch(setPlannerLoading(true));
 
     try {
 
@@ -199,6 +199,6 @@ export const getDailyPlan = (token) => {
 
     }
 
-    dispatch(setLoading(false));
+  dispatch(setPlannerLoading(false));
   };
 };

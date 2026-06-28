@@ -4,12 +4,12 @@ import WelcomeCard from "../components/dashboard/WelcomeCard";
 import StatsCards from "../components/dashboard/StatsCards";
 import TaskList from "../components/dashboard/TaskList";
 import DailyPlan from "../components/dashboard/DailyPlan";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 
 import { getDashboardStats } from "../services/operations/taskAPI";
-import { getAllTasks,getDailyPlan } from "../services/operations/taskAPI";
+import { getAllTasks, getDailyPlan } from "../services/operations/taskAPI";
 import AITaskGenerator from "../components/dashboard/AiTaskGenerator";
 
 import "./Dashboard.css";
@@ -19,13 +19,14 @@ function Dashboard() {
 
     const dispatch = useDispatch();
     const { token } = useSelector((state) => state.auth);
-    const [stats, setStats] = useState(null);
+    const { stats } = useSelector((state) => state.task);
 
-useEffect(() => {
-    dispatch(getDashboardStats(token));
-    dispatch(getAllTasks(token));
-     dispatch(getDailyPlan(token));
-}, [dispatch, token]);
+
+    useEffect(() => {
+        dispatch(getDashboardStats(token));
+        dispatch(getAllTasks(token));
+    }, [dispatch, token]);
+    console.log(stats);
 
     return (
         <div className="dashboard-layout">
@@ -36,18 +37,28 @@ useEffect(() => {
 
                 <Topbar />
 
-                <WelcomeCard />
+                <section id="hero">
+                    <WelcomeCard />
+                </section>
 
-                <StatsCards stats={stats} />
+                <section id="stats">
+                    <StatsCards stats={stats} />
+                </section>
 
                 <div className="dashboard-grid">
-                   
-                   <AITaskGenerator />
-                   <DailyPlan />
 
-                    <TaskList />
+                    <section id="generator">
+                        <AITaskGenerator />
+                    </section>
+                    <section id="planner">
+                        <DailyPlan />
+                    </section>
 
-                    
+                    <section id="tasks">
+                        <TaskList />
+                    </section>
+
+
 
                 </div>
 
