@@ -1,0 +1,45 @@
+/* RESET */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,
+body,
+#root{
+    width:100%;
+    min-height:100vh;
+}
+
+body{
+    font-family:Inter, sans-serif;
+    background:#f5f7fb;
+    color:#111827;
+
+    /* IMPORTANT */
+    display:block;
+}
+
+#root{
+    width:100%;
+    min-height:100vh;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+button{
+    border:none;
+    background:none;
+    cursor:pointer;
+    font:inherit;
+}
+
+img{
+    display:block;
+    max-width:100%;
+}

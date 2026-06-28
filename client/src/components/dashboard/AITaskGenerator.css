@@ -1,0 +1,86 @@
+.ai-generator-card{
+    background:#111827;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:20px;
+    padding:28px;
+    margin-bottom:30px;
+}
+
+.ai-header{
+    display:flex;
+    gap:18px;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.ai-icon{
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:28px;
+    background:linear-gradient(135deg,#6366f1,#8b5cf6);
+}
+
+.ai-header h2{
+    color:white;
+    margin-bottom:6px;
+}
+
+.ai-header p{
+    color:#9ca3af;
+    font-size:.95rem;
+}
+
+.ai-generator-card textarea{
+    width:100%;
+    resize:none;
+    border:none;
+    outline:none;
+    border-radius:16px;
+    padding:18px;
+    background:#1f2937;
+    color:white;
+    font-size:15px;
+    line-height:1.7;
+}
+
+.ai-generator-card textarea::placeholder{
+    color:#6b7280;
+}
+
+.prompt-footer{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:18px;
+    gap:20px;
+}
+
+.prompt-footer span{
+    color:#9ca3af;
+    font-size:.9rem;
+}
+
+.prompt-footer button{
+    border:none;
+    cursor:pointer;
+    padding:14px 28px;
+    border-radius:12px;
+    background:linear-gradient(135deg,#6366f1,#8b5cf6);
+    color:white;
+    font-weight:600;
+    transition:.3s;
+}
+
+.prompt-footer button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 25px rgba(99,102,241,.35);
+}
+
+.prompt-footer button:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+}

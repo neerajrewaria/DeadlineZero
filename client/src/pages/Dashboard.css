@@ -1,0 +1,35 @@
+.dashboard-layout{
+    display:flex;
+    min-height:100vh;
+    background:#070B16;
+    color:white;
+}
+
+.dashboard-main{
+    flex:1;
+    padding:30px;
+    overflow:auto;
+}
+
+.dashboard-grid{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:24px;
+    margin-top:30px;
+}
+
+@media(max-width:1100px){
+
+.dashboard-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.dashboard-main{
+
+padding:20px;
+
+}
+
+}
