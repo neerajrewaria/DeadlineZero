@@ -57,7 +57,7 @@ export const updateProfile =
             }
         };
 
-export const fetchEnrolledCourses = async (token, dispatch) => {
+export const fetchEnrolledCourses = async (token) => {
     let result = [];
     try {
         const response = await apiConnector("GET", profile.GET_ENROLLED_COURSES_API, null, {

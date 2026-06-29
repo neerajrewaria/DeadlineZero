@@ -8,8 +8,12 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 
-import { getDashboardStats } from "../services/operations/taskAPI";
-import { getAllTasks, getDailyPlan } from "../services/operations/taskAPI";
+import {
+    getAllTasks,
+    getDashboardStats,
+    getGoogleCalendarStatus,
+    getStoredDailyPlan,
+} from "../services/operations/taskAPI";
 import AITaskGenerator from "../components/dashboard/AiTaskGenerator";
 
 import "./Dashboard.css";
@@ -23,8 +27,26 @@ function Dashboard() {
 
 
     useEffect(() => {
-        dispatch(getDashboardStats(token));
-        dispatch(getAllTasks(token));
+        if (!token) return;
+
+        const params = new URLSearchParams(window.location.search);
+        const calendarStatus = params.get("calendar");
+
+        const initializeDashboard = async () => {
+            await dispatch(getDashboardStats(token));
+            await dispatch(getAllTasks(token));
+            await dispatch(getStoredDailyPlan(token));
+            await dispatch(getGoogleCalendarStatus(token, calendarStatus === "connected"));
+
+            if (calendarStatus) {
+                params.delete("calendar");
+                const search = params.toString();
+                const nextUrl = `${window.location.pathname}${search ? `?${search}` : ""}${window.location.hash}`;
+                window.history.replaceState({}, "", nextUrl);
+            }
+        };
+
+        initializeDashboard();
     }, [dispatch, token]);
     console.log(stats);
 

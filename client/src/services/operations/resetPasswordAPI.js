@@ -1,11 +1,9 @@
 import { apiConnector } from "../apiconnector";
-import { setToken, clearToken } from "../../redux/slices/authSlice";
-import { setUser, clearUser } from "../../redux/slices/profileSlice";
 import { toast } from "react-hot-toast";
 import { resetpasswordEndpoints } from '../apis'
 
 
-export const resetPasswordToken = (email, navigate) => async (dispatch) => {
+export const resetPasswordToken = (email, navigate) => async () => {
     try {
 
         const response = await apiConnector(
@@ -36,7 +34,7 @@ export const resetPasswordToken = (email, navigate) => async (dispatch) => {
 
 export const resetPassword =
     (password, confirmPassword, token, navigate) =>
-        async (dispatch) => {
+        async () => {
 
             try {
                      console.log({

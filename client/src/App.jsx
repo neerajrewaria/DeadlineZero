@@ -6,6 +6,7 @@ import Signup from "./pages/Signup.jsx";
 import VerifyEmail from "./pages/VerifyEmail.jsx";
 import ForgotPassword from "./pages/ForgotPassword.jsx";
 import Dashboard from "./pages/Dashboard";
+import Analytics from "./components/dashboard/Analytics.jsx";
 
 // import Dashboard from "./pages/Dashboard";
 
@@ -17,10 +18,11 @@ function App() {
       <Route path="/login" element={<Login />} />
 
       <Route path="/signup" element={<Signup />} />
-      <Route path="/verify-email" element={<VerifyEmail/>} />
-      <Route path="/forgot-password"  element={<ForgotPassword/>} />
+      <Route path="/verify-email" element={<VerifyEmail />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/dashboard" element={<Dashboard />} />
-       {/* <Route path="/dashboard" element={<Dashboard />} /> */}
+      <Route path="/dashboard/analytics" element={<Analytics />} />
+      {/* <Route path="/dashboard" element={<Dashboard />} /> */}
     </Routes>
   );
 }

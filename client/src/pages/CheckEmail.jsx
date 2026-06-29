@@ -1,4 +1,3 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./CheckEmail.css";
 import { useLocation } from "react-router-dom";

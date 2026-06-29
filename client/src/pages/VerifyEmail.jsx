@@ -24,7 +24,8 @@ function VerifyEmail() {
         }
 
         // start cooldown because OTP is already sent when the user finished signup
-        setCooldown(30);
+        const timerId = setTimeout(() => setCooldown(30), 0);
+        return () => clearTimeout(timerId);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 

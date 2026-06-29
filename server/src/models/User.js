@@ -116,6 +116,50 @@ role:{
       type: Date,
       default: null,
     },
+
+googleCalendarConnected: {
+    type: Boolean,
+    default: false,
+},
+
+googleAccessToken: {
+    type: String,
+    default: "",
+},
+
+googleRefreshToken: {
+    type: String,
+    default: "",
+},
+
+googleTokenExpiry: {
+    type: Date,
+},
+
+dailyPlan: {
+    type: Schema.Types.Mixed,
+    default: null,
+},
+
+planGeneratedDate: {
+    type: String,
+    default: null,
+},
+
+planSyncedToCalendar: {
+    type: Boolean,
+    default: false,
+},
+
+lastPlanGenerated: {
+    type: Date,
+    default: null,
+},
+
+planOutdated: {
+    type: Boolean,
+    default: false,
+},
   },
   {
     timestamps: true, // adds createdAt, updatedAt

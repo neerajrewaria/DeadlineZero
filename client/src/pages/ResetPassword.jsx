@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./ResetPassword.css";
 import { useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { resetPassword } from "../services/operations/resetPasswordAPI";
 
 const ResetPassword = () => {

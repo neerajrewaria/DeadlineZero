@@ -164,6 +164,10 @@ motivationLevel:{
       type: String,
       default: null,
     },
+    calendarEventLink: {
+      type: String,
+      default: "",
+    },
 
     // ---------- AI Metadata ----------
     aiSummary: {

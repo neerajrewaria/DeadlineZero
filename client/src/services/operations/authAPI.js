@@ -4,8 +4,6 @@ import { setUser, clearUser } from "../../redux/slices/profileSlice";
 import { auth } from "../apis";
 import { toast } from "react-hot-toast";
 
-const BASE_URL = import.meta.env.VITE_BASE_URL || "";
-
 export const login = (email, password, navigate) => async (dispatch) => {
   try {
       console.log("LOGIN URL:", auth.Log_IN);
@@ -33,7 +31,7 @@ export const login = (email, password, navigate) => async (dispatch) => {
 
 
 export const sendOTP = (email, navigate) => {
-  return async (dispatch) => {
+  return async () => {
     try {
       const response = await apiConnector(
         "post",
@@ -66,7 +64,7 @@ export const signUP = (
   confpassword,
   otp,
   navigate) => {
-  return async (dispatch) => {
+  return async () => {
 
     try {
       const response = await apiConnector(

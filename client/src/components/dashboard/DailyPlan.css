@@ -248,9 +248,10 @@
   background:rgba(130,90,255,.18);border:1px solid rgba(130,90,255,.3);
   padding:5px 10px;border-radius:20px;white-space:nowrap;letter-spacing:.02em;
   backdrop-filter:blur(8px);
+  margin-right: 0.4rem;
 }
 .dp-tl-time__dot {
-  position:absolute;right:-7px;top:50%;transform:translateY(-50%);
+  position:absolute;right:7px;top:50%;transform:translateY(-50%);
   width:14px;height:14px;border-radius:50%;
   background:var(--dot,#a78bfa);
   box-shadow:0 0 10px var(--dot,#a78bfa),0 0 20px color-mix(in srgb,var(--dot,#a78bfa) 40%,transparent);
@@ -557,4 +558,252 @@
   .dp-tl-card__title { font-size:13.5px; }
   .dp-sidebar { grid-template-columns:1fr; }
   .dp-loading,.dp-empty { padding:40px 20px; }
+}
+
+
+/* ══════════════════════════════════════════════════════════════════════
+   DailyPlan — Google Calendar Card (new classes only)
+   Append these to the bottom of your existing DailyPlan.css
+══════════════════════════════════════════════════════════════════════ */
+
+/* ── Header layout tweak (adds dp-header__right wrapper) ─────────────
+   Only add this if your dp-header doesn't already use flex.
+   The existing dp-focus-card position is unchanged.               */
+.dp-header__right {
+  display: flex;
+  align-items: stretch;
+  gap: 14px;
+  flex-shrink: 0;
+}
+
+/* ── Calendar Card ──────────────────────────────────────────────────── */
+.dp-cal-card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px 18px;
+  min-width: 210px;
+  border-radius: 16px;
+  background: rgba(15, 15, 28, 0.65);
+  border: 1px solid rgba(99, 102, 241, 0.18);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dp-cal-card:hover {
+  border-color: rgba(99, 102, 241, 0.4);
+  box-shadow: 0 0 28px rgba(99, 102, 241, 0.15);
+}
+
+/* Border beam (matches existing dp-border-beam style) */
+.dp-cal-card__beam {
+  position: absolute;
+  top: 0;
+  left: -80%;
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(99,102,241,0.8), rgba(6,182,212,0.5), transparent);
+  animation: dp-cal-beam 3.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes dp-cal-beam {
+  0%   { left: -60%; }
+  100% { left: 160%; }
+}
+
+.dp-cal-card__top {
+  display: flex;
+  align-items: center;
+}
+
+.dp-cal-card__sub {
+  font-size: 10px;
+  color: rgba(148, 163, 184, 0.6);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* ── Badge ──────────────────────────────────────────────────────────── */
+.dp-cal-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: rgba(99, 102, 241, 0.12);
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  color: #a5b4fc;
+}
+
+.dp-cal-badge--green {
+  background: rgba(16, 185, 129, 0.12);
+  border-color: rgba(16, 185, 129, 0.3);
+  color: #6ee7b7;
+}
+
+.dp-badge-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #a5b4fc;
+  display: inline-block;
+  animation: dp-cal-dot-pulse 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+.dp-badge-dot--green {
+  background: #10b981;
+}
+
+@keyframes dp-cal-dot-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.65); }
+}
+
+/* ── Buttons (base) ─────────────────────────────────────────────────── */
+.dp-cal-btn {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 9px 14px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  white-space: nowrap;
+}
+
+.dp-cal-btn:not(:disabled):hover {
+  transform: translateY(-2px);
+}
+
+.dp-cal-btn__icon {
+  font-size: 14px;
+  line-height: 1;
+}
+
+/* Shared glow layer */
+.dp-cal-btn__glow {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background: radial-gradient(ellipse at center, rgba(255,255,255,0.12), transparent 70%);
+  pointer-events: none;
+}
+.dp-cal-btn:hover .dp-cal-btn__glow { opacity: 1; }
+
+/* Shine sweep */
+.dp-cal-btn__shine {
+  position: absolute;
+  top: 0; left: -80%;
+  width: 50%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+  transform: skewX(-15deg);
+  pointer-events: none;
+  animation: dp-cal-shine 4s ease-in-out infinite;
+}
+@keyframes dp-cal-shine {
+  0%   { left: -80%; }
+  60%  { left: 140%; }
+  100% { left: 140%; }
+}
+
+/* Confetti emoji floats in */
+.dp-cal-btn__confetti {
+  animation: dp-cal-confetti 0.5s ease both;
+  display: inline-block;
+}
+@keyframes dp-cal-confetti {
+  from { transform: scale(0) rotate(-20deg); opacity: 0; }
+  to   { transform: scale(1) rotate(0deg);   opacity: 1; }
+}
+
+/* ── State 1: Connect ────────────────────────────────────────────────── */
+.dp-cal-btn--connect {
+  background: linear-gradient(135deg, rgba(99,102,241,0.85), rgba(139,92,246,0.85));
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(99,102,241,0.35);
+}
+.dp-cal-btn--connect:hover {
+  box-shadow: 0 8px 32px rgba(99,102,241,0.5);
+}
+
+/* ── State 2 / Syncing: Loading ─────────────────────────────────────── */
+.dp-cal-btn--loading {
+  background: linear-gradient(135deg, rgba(99,102,241,0.5), rgba(139,92,246,0.5));
+  color: rgba(255,255,255,0.7);
+  cursor: not-allowed;
+  box-shadow: 0 0 20px rgba(99,102,241,0.2);
+  animation: dp-cal-glow-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes dp-cal-glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(99,102,241,0.2); }
+  50%       { box-shadow: 0 0 36px rgba(99,102,241,0.45); }
+}
+
+/* Spinner */
+.dp-cal-spinner {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.2);
+  border-top-color: rgba(255,255,255,0.85);
+  animation: dp-cal-spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+@keyframes dp-cal-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── State 3: Connected (disabled success) ──────────────────────────── */
+.dp-cal-btn--success {
+  background: linear-gradient(135deg, rgba(16,185,129,0.2), rgba(5,150,105,0.25));
+  border: 1px solid rgba(16,185,129,0.35);
+  color: #6ee7b7;
+  cursor: default;
+  box-shadow: 0 0 18px rgba(16,185,129,0.15);
+}
+
+/* ── State 4: Sync ──────────────────────────────────────────────────── */
+.dp-cal-btn--sync {
+  background: linear-gradient(135deg, rgba(6,182,212,0.8), rgba(99,102,241,0.8));
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(6,182,212,0.3);
+}
+.dp-cal-btn--sync:hover {
+  box-shadow: 0 8px 32px rgba(6,182,212,0.5);
+}
+
+/* ── Responsive ─────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .dp-header__right {
+    flex-direction: column;
+    width: 100%;
+  }
+  .dp-cal-card {
+    min-width: unset;
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .dp-cal-card { padding: 14px; }
+  .dp-cal-btn  { font-size: 11px; padding: 8px 12px; }
 }

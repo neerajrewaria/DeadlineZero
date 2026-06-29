@@ -1,6 +1,6 @@
 // TaskCard.jsx
 import { useDispatch, useSelector } from "react-redux";
-import { completeTask } from "../../services/operations/taskAPI";
+import { completeTask, markTaskPending } from "../../services/operations/taskAPI";
 import "./TaskCard.css";
 
 const CATEGORY_ICONS = {
@@ -32,6 +32,7 @@ function formatDeadline(date) {
 function TaskCard({ task, index = 0 }) {
   const dispatch = useDispatch();
   const { token } = useSelector((state) => state.auth);
+  const { loading } = useSelector((state) => state.task);
 
   const priority = task.priority?.toLowerCase() || "low";
   const status   = task.status?.toLowerCase() || "pending";
@@ -118,14 +119,28 @@ function TaskCard({ task, index = 0 }) {
           </div>
 
           {done ? (
-            <div className="tc-completed-badge">
-              <span className="tc-completed-badge__pulse" />
-              ✅ Task Completed
-            </div>
+            <>
+              <div className="tc-completed-badge">
+                <span className="tc-completed-badge__pulse" />
+                Completed
+              </div>
+              <button
+                className="tc-complete-btn"
+                onClick={() => dispatch(markTaskPending(task._id, token))}
+                disabled={loading}
+              >
+                <span className="tc-complete-btn__glow" />
+                <span className="tc-complete-btn__shine" />
+                <span className="tc-complete-btn__content">
+                  Mark Pending
+                </span>
+              </button>
+            </>
           ) : (
             <button
               className="tc-complete-btn"
               onClick={() => dispatch(completeTask(task._id, token))}
+              disabled={loading}
             >
               <span className="tc-complete-btn__glow" />
               <span className="tc-complete-btn__shine" />

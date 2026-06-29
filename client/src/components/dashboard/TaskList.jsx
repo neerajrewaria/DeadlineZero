@@ -30,7 +30,7 @@ function TaskList() {
                 </span>
               </div>
               <h2 className="tl-header__title">
-                Today's <span className="tl-grad-text">Tasks</span>
+                All <span className="tl-grad-text">Tasks</span>
               </h2>
               <p className="tl-header__sub">
                 AI prioritized tasks for maximum productivity.

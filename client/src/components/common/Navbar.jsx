@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import "./Navbar.css";
 import '../dashboard/AITaskGenerator.css'
+import NotificationDropdown from "../notifications/NotificationDropdown";
 
 function Navbar() {
   const { token } = useSelector((state) => state.auth);
@@ -61,10 +62,7 @@ function Navbar() {
               <Link to="/dashboard" className="navbar__btn navbar__btn--primary">
                 Dashboard
               </Link>
-              <button className="navbar__btn navbar__btn--notify">
-                <span className="navbar__notify-dot" />
-                Notifications
-              </button>
+              <NotificationDropdown />
             </>
           )}
         </div>
@@ -104,10 +102,7 @@ function Navbar() {
               <Link to="/dashboard" className="navbar__btn navbar__btn--primary navbar__btn--full" onClick={closeMenu}>
                 Dashboard
               </Link>
-              <button className="navbar__btn navbar__btn--notify navbar__btn--full" onClick={closeMenu}>
-                <span className="navbar__notify-dot" />
-                Notifications
-              </button>
+              <NotificationDropdown />
             </>
           )}
         </div>
