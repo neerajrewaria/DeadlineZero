@@ -14,7 +14,7 @@ import {
     getGoogleCalendarStatus,
     getStoredDailyPlan,
 } from "../services/operations/taskAPI";
-import AITaskGenerator from "../components/dashboard/AiTaskGenerator";
+import AITaskGenerator from "../components/dashboard/AITaskGenerator";
 
 import "./Dashboard.css";
 
