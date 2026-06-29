@@ -1,7 +1,9 @@
 import Navbar from "../components/common/Navbar.jsx";
+import { useNavigate } from "react-router-dom";
 import "./Home.css";
 
 export default function Home() {
+    const navigate = useNavigate();
   return (
     <div className="home-root">
       <Navbar />
@@ -63,7 +65,7 @@ export default function Home() {
               </p>
 
               <div className="lp-hero__actions">
-                <button className="lp-btn lp-btn--primary">
+                <button className="lp-btn lp-btn--primary"  onClick={() => navigate("/signup")}>
                   <span>Get Started Free</span>
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                     <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -381,7 +383,7 @@ export default function Home() {
               <span className="lp-gradient-text">of your deadlines?</span>
             </h2>
             <p className="lp-cta__sub">Join thousands of students and professionals who never miss a deadline. Free to start — no credit card needed.</p>
-            <button className="lp-btn lp-btn--primary lp-btn--lg">
+            <button className="lp-btn lp-btn--primary lp-btn--lg" onClick={() => navigate("/signup")}>
               <span>Get Started Free</span>
               <svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                 <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -400,7 +402,7 @@ export default function Home() {
               <a href="#" className="lp-footer__link">Privacy</a>
               <a href="#" className="lp-footer__link">Contact</a>
             </nav>
-            <p className="lp-footer__copy">© 2025 DeadlineZero. Built for the hackathon.</p>
+            <p className="lp-footer__copy">© 2026 DeadlineZero. Built for the hackathon.</p>
           </footer>
 
         </section>
